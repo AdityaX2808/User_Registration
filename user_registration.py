@@ -7,8 +7,8 @@ def last_name(name):
     return bool(re.fullmatch(r'^[A-Z][a-zA-Z]{2,}$', name))
 
 def main():
-    first_name = input("Enter your first name: ")
-    last_name = input("Enter your last name: ")
+    first_name = input("Enter your first name: ").strip()
+    last_name = input("Enter your last name: ").strip()
 
     if first_name(first_name) and last_name(last_name):
         print("Valid first and last name!")
