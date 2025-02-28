@@ -26,6 +26,14 @@ def validate_email(email):
     pattern = r"^[a-zA-Z0-9._%+-]+\@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
     return bool(re.fullmatch(pattern, email))
 
+def validate_mobile_number(number):
+    """
+    validate the mobile number 
+    it should contain +91 in front.
+    """
+    pattern = r"^\+91\s[6-9]\d{9}$"
+    return bool(re.fullmatch(pattern, number))
+
 def main():
     """
     Main function to take user input and validate first name, last name, and email.
@@ -48,11 +56,18 @@ def main():
             break
         print("Invalid email! Example: abc.xyz@bl.co.in")
 
+    while True:  # Validate mobile number
+        mobile_number = input("Enter your mobile number (Format: +91 1234567890): ").strip()
+        if validate_mobile_number(mobile_number):
+            break
+        print("Invalid mobile number! It must follow the format: +91 1234567890")    
+
     print("\nRegistration Successful!")
     print(f"Full Name: {first_name} {last_name}")
-    print(f"Email: {email}\n")
+    print(f"Email: {email}")
+    print(f"Mobile Number: {mobile_number}")
     exit()
 
 # Run the main function
 if __name__ == "__main__":
-    main()
+    main()    
