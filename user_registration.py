@@ -48,7 +48,7 @@ def validate_password(password):
         len(password) >= 8
         and any(char.isupper() for char in password)
         and any(char.isdigit() for char in password)
-        and len(special_chars) == 1  # ✅ Fixed the issue here
+        and len(special_chars) == 1 
     )   
 
 def main():
