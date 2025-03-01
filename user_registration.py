@@ -37,16 +37,19 @@ def validate_mobile_number(number):
 def validate_password(password):
     """
     Validates password:
-    - Must be at least 8 characters long 
+    - Must be at least 8 characters long. 
     - Must have atleast 1 upper case character.
+    - Must have atleast 1 number.
+    - Must have atleast 1 special character.
     """
-    if len(password) < 8:
-        return False
-    if not any(char.isupper() for char in password):
-        return False
-    if not any(char.isdigit() for char in password):
-        return False    
-    return True    
+    special_chars = re.findall(r"[!@#$%^&*(),.?\":{}|<>]", password)
+
+    return (
+        len(password) >= 8
+        and any(char.isupper() for char in password)
+        and any(char.isdigit() for char in password)
+        and len(special_chars) == 1  # ✅ Fixed the issue here
+    )   
 
 def main():
     """
@@ -80,7 +83,7 @@ def main():
         password = input("Enter your password: ").strip()
         if validate_password(password):
             break
-        print("Invalid password! It must be at least 8 characters 1 uppercase and 1 number..")
+        print("Invalid password! It must be at least 8 characters 1 uppercase and 1 number  and 1 special character...")
 
     print("\nRegistration Successful!")
     print(f"Full Name: {first_name} {last_name}")
