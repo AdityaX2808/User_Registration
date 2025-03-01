@@ -37,11 +37,14 @@ def validate_mobile_number(number):
 def validate_password(password):
     """
     Validates password:
-    - Must be at least 8 characters long.
+    - Must be at least 8 characters long 
+    - Must have atleast 1 upper case character.
     """
-    if len(password) >= 8:
-        return True
-    return False    
+    if len(password) < 8:
+        return False
+    if not any(char.isupper() for char in password):
+        return False
+    return True    
 
 def main():
     """
@@ -75,7 +78,7 @@ def main():
         password = input("Enter your password: ").strip()
         if validate_password(password):
             break
-        print("❌ Invalid password! It must be at least 8 characters long.")
+        print("Invalid password! It must be at least 8 characters long and contain at least one uppercase letter..")
 
     print("\nRegistration Successful!")
     print(f"Full Name: {first_name} {last_name}")
