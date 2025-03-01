@@ -44,6 +44,8 @@ def validate_password(password):
         return False
     if not any(char.isupper() for char in password):
         return False
+    if not any(char.isdigit() for char in password):
+        return False    
     return True    
 
 def main():
@@ -78,7 +80,7 @@ def main():
         password = input("Enter your password: ").strip()
         if validate_password(password):
             break
-        print("Invalid password! It must be at least 8 characters long and contain at least one uppercase letter..")
+        print("Invalid password! It must be at least 8 characters 1 uppercase and 1 number..")
 
     print("\nRegistration Successful!")
     print(f"Full Name: {first_name} {last_name}")
