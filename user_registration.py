@@ -34,6 +34,15 @@ def validate_mobile_number(number):
     pattern = r"^\+91\s[6-9]\d{9}$"
     return bool(re.fullmatch(pattern, number))
 
+def validate_password(password):
+    """
+    Validates password:
+    - Must be at least 8 characters long.
+    """
+    if len(password) >= 8:
+        return True
+    return False    
+
 def main():
     """
     Main function to take user input and validate first name, last name, and email.
@@ -62,10 +71,17 @@ def main():
             break
         print("Invalid mobile number! It must follow the format: +91 1234567890")    
 
+    while True:  # Validate password
+        password = input("Enter your password: ").strip()
+        if validate_password(password):
+            break
+        print("❌ Invalid password! It must be at least 8 characters long.")
+
     print("\nRegistration Successful!")
     print(f"Full Name: {first_name} {last_name}")
     print(f"Email: {email}")
     print(f"Mobile Number: {mobile_number}")
+    print(f"Password: {password}")
     exit()
 
 # Run the main function
