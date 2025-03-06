@@ -1,0 +1,15 @@
+2025-03-06 11:43:27,847 - WARNING - Invalid first name attempt: aditya
+2025-03-06 11:43:30,356 - WARNING - Invalid first name attempt: add
+2025-03-06 11:43:31,635 - WARNING - Invalid first name attempt: as
+2025-03-06 11:43:32,868 - WARNING - Invalid first name attempt: ad
+2025-03-06 11:43:35,544 - WARNING - Invalid first name attempt: aditya
+2025-03-06 11:43:37,492 - INFO - Valid first name: Aditya
+2025-03-06 11:43:38,778 - WARNING - Invalid first name attempt: K
+2025-03-06 11:43:40,392 - WARNING - Invalid first name attempt: Ku
+2025-03-06 11:43:41,700 - INFO - Valid first name: Kum
+2025-03-06 11:43:42,094 - WARNING - Invalid email attempt: 
+2025-03-06 11:43:49,725 - WARNING - Invalid email attempt: asd@asd@sdf.sadf
+2025-03-06 11:44:05,409 - INFO - Valid email: sadfas@dsaf.dsn
+2025-03-06 11:44:17,819 - INFO - Valid mobile number: +91 9333333333
+2025-03-06 11:44:26,384 - INFO - Valid password entered.
+2025-03-06 11:44:26,384 - INFO - Registration successful!

@@ -1,4 +1,13 @@
 import re
+import logging
+
+# Set up logging configuration
+logging.basicConfig(
+    filename="user_registration.log",  # Save logs to a file
+    filemode="w",
+    level=logging.INFO,  # Log INFO and above (WARNING, ERROR)
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
 def validate_first_name(first_name):
     """
@@ -9,51 +18,69 @@ def validate_first_name(first_name):
     """
     pattern = r"^[A-Z][a-zA-Z ]{2,}$"
     if re.fullmatch(pattern, first_name) and not any(char.isdigit() for char in first_name):
+        logging.info(f"Valid first name: {first_name}")
         return True
+    
+    logging.warning(f"Invalid first name attempt: {first_name}")
     return False
 
 def validate_last_name(last_name):
     """
-    Validates the last name same rules as first name.
+    Validates the last name (same rules as first name).
     """
-    # Reusing logic to follow DRY principle
     return validate_first_name(last_name)  
 
 def validate_email(email):
     """
-    Validates email format:
+    Validates email format.
     """
     pattern = r"^[a-zA-Z0-9._%+-]+\@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-    return bool(re.fullmatch(pattern, email))
+    if re.fullmatch(pattern, email):
+        logging.info(f"Valid email: {email}")
+        return True
+    
+    logging.warning(f"Invalid email attempt: {email}")
+    return False
 
 def validate_mobile_number(number):
     """
-    validate the mobile number 
-    it should contain +91 in front.
+    Validates the mobile number:
+    - Should contain +91 in front.
+    - Should be exactly 10 digits after +91.
     """
     pattern = r"^\+91\s[6-9]\d{9}$"
-    return bool(re.fullmatch(pattern, number))
+    if re.fullmatch(pattern, number):
+        logging.info(f"Valid mobile number: {number}")
+        return True
+
+    logging.warning(f"Invalid mobile number attempt: {number}")
+    return False
 
 def validate_password(password):
     """
     Validates password:
-    - Must be at least 8 characters long. 
-    - Must have atleast 1 upper case character.
-    - Must have atleast 1 number.
-    - Must have atleast 1 special character.
+    - At least 8 characters long.
+    - At least 1 uppercase character.
+    - At least 1 number.
+    - At least 1 special character.
     """
     special_chars = re.findall(r"[!@#$%^&*(),.?\":{}|<>]", password)
 
-    return (
+    if (
         len(password) >= 8
         and any(char.isupper() for char in password)
         and any(char.isdigit() for char in password)
-        and len(special_chars) == 1  # ✅ Fixed the issue here
-    )   
+        and len(special_chars) == 1
+    ):
+        logging.info("Valid password entered.")
+        return True
+
+    logging.warning("Invalid password attempt.")
+    return False   
 
 def main():
     """
-    Main function to take user input and validate first name, last name, and email.
+    Main function to take user input and validate first name, last name, email, mobile number, and password.
     """
     while True:  # Validate first name
         first_name = input("Enter your first name: ").strip()
@@ -83,15 +110,15 @@ def main():
         password = input("Enter your password: ").strip()
         if validate_password(password):
             break
-        print("Invalid password! It must be at least 8 characters 1 uppercase and 1 number  and 1 special character...")
+        print("Invalid password! It must be at least 8 characters, contain 1 uppercase letter, 1 number, and 1 special character.")
 
+    logging.info("Registration successful!")
+    
     print("\nRegistration Successful!")
     print(f"Full Name: {first_name} {last_name}")
     print(f"Email: {email}")
     print(f"Mobile Number: {mobile_number}")
     print(f"Password: {password}")
-    exit()
 
-# Run the main function
 if __name__ == "__main__":
-    main()    
+    main()
